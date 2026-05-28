@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+pydantic
+openai
+httpx
+pytest
+pytest-asyncio
+ruff

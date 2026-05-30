@@ -2,6 +2,7 @@ fastapi
 uvicorn[standard]
 sqlmodel
 pydantic
+pydantic-settings
 openai
 httpx
 pytest

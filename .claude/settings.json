@@ -27,5 +27,28 @@
       "Read(./*.db)",
       "Read(./*.sqlite3)"
     ]
+  },
+
+
+  "hooks": {
+    "PreToolUse": [
+
+
+      
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": ".claude/hooks/guard-commit.sh" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command", "command": "ruff check app/ --fix --quiet || true" }
+        ]
+      }
+    ]
   }
 }

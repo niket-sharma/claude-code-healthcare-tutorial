@@ -695,7 +695,9 @@ git commit -m "feat: phi-audit skill + commit-guard hook + auto-lint"
 
 ### 7.1 — Add the GitHub MCP server
 
-First create a GitHub repo for CareTriage (separate from [claude-code-healthcare-tutorial](https://github.com/niket-sharma/claude-code-healthcare-tutorial) — this is your *app* repo) and a personal access token (classic, with `repo` scope). Put the token in `.env` (never in code):
+Use this same repository, [claude-code-healthcare-tutorial](https://github.com/niket-sharma/claude-code-healthcare-tutorial), as the CareTriage project repo for this phase. Do not create a separate app repo. The GitHub issues and PRs Claude manages through MCP will live here alongside the tutorial and app files.
+
+Create a personal access token (classic, with `repo` scope). Put the token in `.env` (never in code):
 
 ```bash
 echo 'GITHUB_TOKEN=ghp_your_token_here' >> .env
@@ -710,7 +712,7 @@ claude mcp add github npx @github/mcp-server
 Now Claude can read/create issues and PRs. Try it:
 
 ```
-List the open issues in my caretriage repo, and create a new issue titled
+List the open issues in my claude-code-healthcare-tutorial repo, and create a new issue titled
 "Add encounter list endpoint for the dashboard" with a short body.
 ```
 

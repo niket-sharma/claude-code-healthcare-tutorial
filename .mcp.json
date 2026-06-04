@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "refs": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "./reference"
+      ],
+      "env": {}
+    }
+  }
+}

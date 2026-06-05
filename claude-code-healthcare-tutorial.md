@@ -905,12 +905,26 @@ safety module.
 
 ### 9.3 — Run them
 
-Open a Claude session in each worktree (two terminals), and in each, invoke the matching agent — or drive both from the root session by delegating:
+Recommended: use one Claude session from the root project as the orchestrator. It can delegate both workstreams to the matching agents in their separate worktrees and run them in parallel:
 
 ```
 Delegate the dashboard build to frontend-agent (in the frontend worktree) and
 backend polish to backend-agent (in the backend worktree). They work in parallel.
 Report when each finishes.
+```
+
+Alternative: open one Claude session in each worktree using two terminals. In that case, the prompts are different because each terminal is driving only one agent.
+
+Frontend terminal, inside the frontend worktree:
+
+```
+Use frontend-agent to build the dashboard UI.
+```
+
+Backend terminal, inside the backend worktree:
+
+```
+Use backend-agent to polish the backend encounters endpoint.
 ```
 
 While they run, you can watch progress. Each commits to its own branch.

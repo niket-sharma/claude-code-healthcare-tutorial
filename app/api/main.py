@@ -1,12 +1,17 @@
+import logging
 from contextlib import asynccontextmanager
 
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel
 from sqlmodel import Session
 
 from app.core.db import create_db_and_tables, get_session
 from app.models.encounter import Encounter
+from app.models.review_queue import ReviewQueue as _ReviewQueue  # noqa: F401 — registers table
+from app.services.review_queue import enqueue_if_urgent
 from app.services.triage import TriageResult, triage
+
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -44,5 +49,12 @@ async def create_triage(
         disclaimer=result.disclaimer,
     )
     session.add(encounter)
-    session.commit()
+    try:
+        session.flush()  # obtain encounter.id before enqueue
+        enqueue_if_urgent(session, encounter)
+        session.commit()
+    except Exception:
+        session.rollback()
+        logger.exception("Failed to persist encounter or review queue entry")
+        raise HTTPException(status_code=503, detail="Could not save encounter. Please try again.")
     return result

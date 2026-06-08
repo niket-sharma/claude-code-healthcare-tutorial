@@ -1,0 +1,4 @@
+- [ ] Add docstrings to all functions in app/services/
+- [ ] Add type hints where missing in app/api/
+- [ ] Expand tests/fixtures with 10 more synthetic intake examples
+- [ ] Add OpenAPI summaries/descriptions to each endpoint

@@ -931,8 +931,9 @@ While they run, you can watch progress. Each commits to its own branch.
 
 ### 9.4 — Merge the workstreams
 
+From your original repo root:
+
 ```bash
-cd ~/projects/caretriage
 git merge feature/backend-polish
 git merge feature/dashboard
 # resolve any conflicts (should be minimal since they owned different dirs)
@@ -1023,10 +1024,14 @@ git add -A && git commit -m "feat: clinician review queue for urgent encounters 
 
 ### 11.1 — Isolate
 
+From your original repo root:
+
 ```bash
 git worktree add ../caretriage-ralph -b experiment/test-expansion
 cd ../caretriage-ralph
 ```
+
+This creates a second working directory for the same repository, not a new repo. The branch lives in your original `claude-code-healthcare-tutorial` Git history; the separate folder only keeps the autonomous loop isolated from your main checkout.
 
 ### 11.2 — Write the agent prompt with a hard stop condition
 
@@ -1069,7 +1074,7 @@ chmod +x ralph.sh
 When it finishes, review the generated tests *yourself* — autonomy doesn't remove the review step, it relocates it to the end. Cherry-pick or merge what's good:
 
 ```bash
-cd ~/projects/caretriage
+cd -   # return to your original repo root if you followed 11.1 in this shell
 git merge experiment/test-expansion   # or cherry-pick specific commits
 git worktree remove ../caretriage-ralph
 ```

@@ -1223,6 +1223,19 @@ Tick these off — if any feel shaky, revisit that phase:
 - Add an MCP server for a real clinical-reference API (audit it first)
 - Add structured audit logging (encounter_id only — never content)
 - Containerize with Docker so the autonomous loops run fully isolated
-- Add an evaluation harness that scores triage suggestions against a synthetic gold set (great Ralph-loop target)
+- Add an evaluation harness ti meant imprhat scores triage suggestions against a synthetic gold set (great Ralph-loop target)
 
 Remember the throughline: **the AI is assistive, the safety layer is deterministic, the data is synthetic, and the guardrails are enforced by machinery — not by hoping the model behaves.** That mindset is what separates a demo from responsible healthcare software.
+
+## Dyanmic Workflows - Ultracode
+
+Use a workflow to audit claude-code-healthcare-tutorial.md. 
+Spawn one subagent per phase (0–13). Each subagent should:
+  1. Extract all code blocks in that phase
+  2. Check each command/path for validity and internal consistency
+  3. Flag anything referencing features that postdate the tutorial 
+     (dynamic workflows, ultracode, Opus 4.8)
+  4. Return a structured result: phase number, Pass/Warn/Fail, issues list
+
+Synthesize all results into AUDIT_REPORT.md with a summary table 
+and detailed findings per phase.
